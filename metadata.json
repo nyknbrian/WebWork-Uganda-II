@@ -1,0 +1,6 @@
+{
+  "name": "WebWork Uganda",
+  "description": "A modern website for WebWork Uganda, an ICT infrastructure and software development company featuring their services, portfolio, executive message, and contact channel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
