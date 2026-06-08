@@ -59,6 +59,24 @@ export const SERVICES: Service[] = [
       'Unified enterprise user access governance (Identity management)'
     ],
     iconName: 'Cloud'
+  },
+  {
+    id: 'defense',
+    title: 'Tactical Defense & Surveillance Technologies',
+    description: 'Engineering resilient, military-grade perimeter protection and situational surveillance systems. We specialize in deploying long-range thermal tracking loops and foliage-penetrating ground radar systems to guard critical commercial frontiers and private properties.',
+    category: 'Defense',
+    features: [
+      'Long-Range Electro-Optical (EO) & Thermal Infared CCTV Systems',
+      'Ground Surveillance Radar (GSR) Installation, Calibration & Setup',
+      'Unified Visual Security Command & Control Room Integrations',
+      'Precision Active Patrol Alarms & Integrated Threat Verification loops'
+    ],
+    specs: [
+      'High-grade active pan-tilt-zoom (PTZ) optical cameras with up to 10km range',
+      'Foliage-penetrating X-band radar swathes tracking moving multi-targets',
+      'Localized air-gapped security networks with secure backup satellite feeds'
+    ],
+    iconName: 'Shield'
   }
 ];
 
@@ -137,6 +155,25 @@ export const PROJECTS: Project[] = [
       'Intelligent bandwidth routing priority (Quality of Service) for secure video and voice calls',
       'Neatly integrated under-floor cabling paths with modern desk grommets',
       'Unified cloud controller for fast remote monitoring and network auditing'
+    ]
+  },
+  {
+    id: 'lake-victoria-surveillance',
+    title: 'Lake Victoria Coastal Border Surveillance Initiative',
+    description: 'Integrated long-range electro-optical CCTV scopes and Ground Surveillance Radar network securing key logistics terminals of Uganda.',
+    category: 'Defense',
+    image: '/src/assets/images/portfolio_defense_1780917962533.png',
+    client: 'Ministry of Transit & Maritime Frontier Safety',
+    location: 'Entebbe & Jinja Ports, Uganda',
+    year: '2026',
+    technologies: ['Ground Surveillance Radar (GSR)', 'Long-Range Thermal Zoom PTZ', 'Solar-coupled UPS systems', 'Fiber-optic rings'],
+    metrics: '100% detection rate of illegal nighttime docking on critical shipping channels',
+    story: 'Securing Uganda’s vast waterways requires robust tools capable of identifying vessels under pitch-black conditions or during intense rain squalls. WebWork Uganda partnered with coastal logistics operators to deploy a unified perimeter surveillance loop. We installed high-precision FMCW ground surveillance radars paired with long-range dual thermal/optical video trackers on reinforced 15-meter steel towers. Real-time telemetry is streamed via secure, encrypted VPN networks to central commands, ensuring complete situational safety around high-value harbor channels.',
+    features: [
+      'Integrated 4km ground/water radar sweeps with active threat mapping outputs',
+      'High-range thermal zoom loops that automatically slew and track triggered targets',
+      'Marine-grade defensive housing built to withstand severe wind and humidity',
+      'Standalone solar generator configurations ensuring continuous off-grid uptime'
     ]
   }
 ];

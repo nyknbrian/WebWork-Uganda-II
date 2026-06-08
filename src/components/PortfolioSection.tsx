@@ -6,10 +6,10 @@
 import React, { useState } from 'react';
 import { PROJECTS } from '../data';
 import { Project } from '../types';
-import { Filter, Database, Radio, Landmark, X, Pin, CheckCircle2, Cpu } from 'lucide-react';
+import { Filter, Database, Radio, Shield, Landmark, X, Pin, CheckCircle2, Cpu } from 'lucide-react';
 
 export default function PortfolioSection() {
-  const [filter, setFilter] = useState<'All' | 'Software' | 'Infrastructure'>('All');
+  const [filter, setFilter] = useState<'All' | 'Software' | 'Infrastructure' | 'Defense'>('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = PROJECTS.filter((proj) => {
@@ -71,6 +71,18 @@ export default function PortfolioSection() {
           >
             <Radio className="h-3.5 w-3.5" />
             Physical Infrastructure
+          </button>
+          <button
+            id="filter-btn-defense"
+            onClick={() => setFilter('Defense')}
+            className={`cursor-pointer px-5 py-2 text-xs font-bold tracking-wider uppercase rounded-xs transition-all flex items-center gap-1.5 ${
+              filter === 'Defense'
+                ? 'bg-[#f4eedb] text-[#0b1a30] shadow'
+                : 'bg-[#112543] text-[#f4eedb]/80 hover:bg-[#112543]/85 hover:text-white'
+            }`}
+          >
+            <Shield className="h-3.5 w-3.5" />
+            Defense Technologies
           </button>
         </div>
 

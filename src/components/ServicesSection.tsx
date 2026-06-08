@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { SERVICES } from '../data';
-import { Code, Server, Cloud, ChevronRight, CheckCircle2, Cpu, Wrench } from 'lucide-react';
+import { Code, Server, Cloud, Shield, ChevronRight, CheckCircle2, Cpu, Wrench } from 'lucide-react';
 
 interface ServicesSectionProps {
   onLearnMore: (viewId: string) => void;
@@ -23,6 +23,8 @@ export default function ServicesSection({ onLearnMore }: ServicesSectionProps) {
         return <Server className="h-7 w-7 text-[#0b1a30]" />;
       case 'Cloud':
         return <Cloud className="h-7 w-7 text-[#0b1a30]" />;
+      case 'Shield':
+        return <Shield className="h-7 w-7 text-[#0b1a30]" />;
       default:
         return <Cpu className="h-7 w-7 text-[#0b1a30]" />;
     }

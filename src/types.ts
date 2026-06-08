@@ -7,7 +7,7 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  category: 'Software' | 'Infrastructure';
+  category: 'Software' | 'Infrastructure' | 'Defense';
   image: string;
   client: string;
   location: string;
@@ -22,7 +22,7 @@ export interface Service {
   id: string;
   title: string;
   description: string;
-  category: 'Software' | 'Infrastructure';
+  category: 'Software' | 'Infrastructure' | 'Defense';
   features: string[];
   specs: string[];
   iconName: string; // Dynamic rendering via lucide icons
