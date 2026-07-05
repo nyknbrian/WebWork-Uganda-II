@@ -25,7 +25,7 @@ export default function AboutSection({ onLearnMore }: AboutSectionProps) {
     },
     {
       title: 'Reliable After-Sales Care',
-      description: 'An installation is only as resilient as its technical team. We operate an active local hotline support system and dispatch local technicians on motorcycles within Kampala, Gulu, and Mbarara bounds.',
+      description: 'An installation is only as resilient as its technical team. We operate an active local hotline support system and dispatch local technicians on motorcycles within Kampala and Gulu bounds.',
       icon: <HeartHandshake className="h-5 w-5 text-[#f4eedb]" />
     }
   ];

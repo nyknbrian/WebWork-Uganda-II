@@ -76,10 +76,10 @@ export default function Hero({ onLearnMore }: HeroProps) {
             {/* Local Trust Tags */}
             <div className="flex flex-wrap items-center gap-y-2 gap-x-6 pt-2 text-xs text-gray-400">
               <span className="flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-red-400" /> Nakasero, Kampala (HQ)
+                <MapPin className="h-3.5 w-3.5 text-red-400" /> Buwaate, Kira. Kampala (HQ)
               </span>
               <span className="flex items-center gap-1.5">
-                <Radio className="h-3.5 w-3.5 text-green-400" /> Gulu, Mbarara Regional Hubs
+                <Radio className="h-3.5 w-3.5 text-green-400" /> Gulu Regional Hub
               </span>
               <span className="flex items-center gap-1.5">
                 <Shield className="h-3.5 w-3.5 text-blue-400" /> NITA-U Certified Standards

@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { ContactFormInput, ClientInquiry } from '../types';
-import { Mail, Phone, MapPin, CheckCircle, Clock, ShieldCheck, Database, CalendarDays, ListFilter, Trash2 } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle, Clock, ShieldCheck, Database, CalendarDays, ListFilter, Trash2, Copy, ExternalLink } from 'lucide-react';
 
 interface ContactSectionProps {
   onInquirySubmitted: () => void;
@@ -25,6 +25,7 @@ export default function ContactSection({ onInquirySubmitted }: ContactSectionPro
   const [previousInquiries, setPreviousInquiries] = useState<ClientInquiry[]>([]);
   const [showInquiryHistory, setShowInquiryHistory] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [copied, setCopied] = useState(false);
 
   // Hydrate submitted items from standard local persistence
   useEffect(() => {
@@ -41,6 +42,44 @@ export default function ContactSection({ onInquirySubmitted }: ContactSectionPro
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormInput((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleOpenEmail = (inquiry: ClientInquiry) => {
+    const emailTo = 'webworkuganda@gmail.com';
+    const emailSubject = `WebWork Uganda Consultation Request - ${inquiry.serviceType} (Ticket: ${inquiry.id})`;
+    const emailBody = `WebWork Uganda Project Consultation Request
+
+Ticket ID: ${inquiry.id}
+Date: ${inquiry.date}
+
+Client Details:
+------------------------------------------
+Full Name: ${inquiry.name}
+Work Email: ${inquiry.email}
+Phone Line: ${inquiry.phone}
+Company: ${inquiry.company || 'Private Client'}
+Service Focus: ${inquiry.serviceType}
+
+Project Needs & Scope:
+------------------------------------------
+${inquiry.message}
+
+--
+Sent via WebWork Uganda Portal`;
+
+    const mailtoUrl = `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoUrl;
+  };
+
+  const handleCopyContent = () => {
+    if (!submittedInquiry) return;
+    const emailSubject = `WebWork Uganda Consultation Request - ${submittedInquiry.serviceType} (Ticket: ${submittedInquiry.id})`;
+    const bodyText = `To: webworkuganda@gmail.com\nSubject: ${emailSubject}\n\nWebWork Uganda Project Consultation Request\n\nTicket ID: ${submittedInquiry.id}\nDate: ${submittedInquiry.date}\n\nClient Details:\n------------------------------------------\nFull Name: ${submittedInquiry.name}\nWork Email: ${submittedInquiry.email}\nPhone Line: ${submittedInquiry.phone}\nCompany: ${submittedInquiry.company || 'Private Client'}\nService Focus: ${submittedInquiry.serviceType}\n\nProject Needs & Scope:\n------------------------------------------\n${submittedInquiry.message}\n\n--\nSent via WebWork Uganda Portal`;
+
+    navigator.clipboard.writeText(bodyText).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -76,6 +115,9 @@ export default function ContactSection({ onInquirySubmitted }: ContactSectionPro
       setPreviousInquiries(updatedList);
       setSubmittedInquiry(newInquiry);
       onInquirySubmitted(); // Notify parent of submission
+
+      // Automatically trigger email client
+      handleOpenEmail(newInquiry);
 
       // Clear input fields for next use
       setFormInput({
@@ -140,8 +182,8 @@ export default function ContactSection({ onInquirySubmitted }: ContactSectionPro
                   </div>
                   <div>
                     <div className="text-xs font-mono text-gray-400 uppercase">Headquarters</div>
-                    <div className="text-sm font-semibold text-white">Pearl Towers, Level 3, Suite A</div>
-                    <div className="text-xs text-gray-300">Nakasero Hill Road, Kampala Road, Uganda</div>
+                    <div className="text-sm font-semibold text-white">P.O.BOX 22068</div>
+                    <div className="text-xs text-gray-300">Buwaate, Kira. Kampala, Uganda</div>
                   </div>
                 </div>
 
@@ -330,8 +372,39 @@ export default function ContactSection({ onInquirySubmitted }: ContactSectionPro
                   </div>
 
                   <p className="text-gray-300 text-sm leading-relaxed">
-                    Thank you, <span className="text-[#f4eedb] font-semibold">{submittedInquiry.name}</span>. Your technical consult profile has been logged on the local roster. A certified WebWork systems engineer is reviewing your parameters.
+                    Thank you, <span className="text-[#f4eedb] font-semibold">{submittedInquiry.name}</span>. Your technical consult profile has been logged on the local roster. The details have been prepared for direct delivery to <span className="text-[#f4eedb] font-semibold underline">webworkuganda@gmail.com</span>.
                   </p>
+
+                  {/* Mail Transmission Assistant Utility Box */}
+                  <div className="bg-[#0b1a30]/80 p-5 rounded-lg border border-[#f4eedb]/20 space-y-3 text-left">
+                    <div className="flex items-center gap-2 text-xs font-mono text-amber-200 uppercase">
+                      <Mail className="h-4 w-4 text-amber-300" />
+                      <span>Email Delivery Assistant</span>
+                    </div>
+                    <p className="text-xs text-gray-300 leading-relaxed">
+                      We've automatically attempted to launch your device's primary email client to send this specification package to <strong className="text-white">webworkuganda@gmail.com</strong>. If your email app did not open, or if you prefer manual dispatch, use the quick actions below:
+                    </p>
+                    <div className="flex flex-wrap gap-2.5 pt-1">
+                      <button
+                        id="send-email-mailto-btn"
+                        type="button"
+                        onClick={() => handleOpenEmail(submittedInquiry)}
+                        className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f4eedb] hover:bg-[#eae0c5] text-[#0b1a30] text-[11px] font-bold uppercase rounded-sm transition-all"
+                      >
+                        <ExternalLink className="h-3.5 w-3.5" />
+                        <span>Launch Email Client</span>
+                      </button>
+                      <button
+                        id="copy-email-body-btn"
+                        type="button"
+                        onClick={handleCopyContent}
+                        className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-[#f4eedb] text-[11px] font-bold uppercase rounded-sm transition-all border border-[#f4eedb]/20"
+                      >
+                        <Copy className="h-3.5 w-3.5" />
+                        <span>{copied ? 'Copied to Clipboard!' : 'Copy Formatted Specifications'}</span>
+                      </button>
+                    </div>
+                  </div>
 
                   {/* Progressive Pipeline Steps */}
                   <div className="space-y-4">
@@ -339,11 +412,11 @@ export default function ContactSection({ onInquirySubmitted }: ContactSectionPro
                     <div className="grid grid-cols-1 gap-2.5 font-mono text-xs text-left">
                       <div className="flex items-center gap-2 px-3 py-2.5 bg-[#0b1a30]/80 rounded border-l-4 border-green-500 text-gray-300">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                        <span className="font-semibold text-white">[1] Logged</span> — Parameters captured in secure local tracking.
+                        <span className="font-semibold text-white">[1] Registered</span> — Captured locally & pre-filled for webworkuganda@gmail.com.
                       </div>
                       <div className="flex items-center gap-2 px-3 py-2.5 bg-[#0b1a30]/45 rounded border-l-4 border-[#f4eedb] text-gray-400 animate-pulse">
                         <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                        <span className="font-semibold text-[#f4eedb]">[2] Auditor Assignment</span> — Technical architect reviewing scope.
+                        <span className="font-semibold text-[#f4eedb]">[2] Review & Queue</span> — Architect analyzing parameters at Kampala hub.
                       </div>
                       <div className="flex items-center gap-2 px-3 py-2.5 bg-transparent rounded border-l-4 border-gray-800 text-gray-500">
                         <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />

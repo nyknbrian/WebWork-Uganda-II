@@ -153,7 +153,6 @@ export default function App() {
                 <div className="space-y-1 font-mono text-[10px]">
                   <div className="text-gray-300"># SLA: +256-777-920188</div>
                   <div className="text-gray-400"># Gulu Regional Hub</div>
-                  <div className="text-gray-400"># Mbarara Logistics</div>
                   <div className="text-green-400"># Server Live (UTC)</div>
                 </div>
               </div>
@@ -164,8 +163,8 @@ export default function App() {
               <h4 className="text-xs font-mono uppercase text-[#f4eedb] tracking-wider font-semibold">Contact Registry</h4>
               <div className="space-y-2.5 text-xs text-gray-300">
                 <p className="leading-snug">
-                  Pearl Towers, Level 3, Suite A<br />
-                  Nakasero Hill Road, Kampala Road, Uganda
+                  P.O.BOX 22068<br />
+                  Buwaate, Kira. Kampala, Uganda
                 </p>
                 <div className="text-[11px] font-mono whitespace-nowrap text-[#f4eedb]">
                   E: <a href="mailto:info@webwork.co.ug" className="hover:underline">info@webwork.co.ug</a>
